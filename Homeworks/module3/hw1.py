@@ -35,31 +35,27 @@ import re
 
 def validate_line(line: str) -> bool:
     arr = line.split(" ")
-    if len(arr) == 5:
-        return True
-    else:
-        return False
+    return len(arr) == 5
     ...
 
 
 def validate_date(date: str) -> bool:
     core = date.split(" ")[-1]
-    if re.match(r'\d{4}-\d{2}-\d{2}\n', core):
-        return True
-    else:
-        return False
+    return re.match(r'\d{4}-\d{2}-\d{2}\n', core)
+
     ...
 
 
 def check_data(filepath: str, validators: Iterable[Callable]) -> str:
-    f = open(filepath)
-    res = open("result.txt", "w")
-    for x in f:
-        if not (validate_line(x)):
-            res.write(x[0:-1]+" validate_line\n")
-        elif not (validate_date(x)):
-            res.write(x[0:-1]+" validate_date\n")
-    return os.getcwd()+"\\result.txt"
+    with open(filepath) as f:
+        with open("result.txt", "w") as res:
+            for x in f:
+                for y in validators:
+                    if not (y(x)):
+                        res.write(x[0:-1]+" " + y.__name__ + "\n")
+                        break
+    return os.path.abspath("result.txt")
 
     ...
+
 check_data("data.txt",[validate_date, validate_line])
