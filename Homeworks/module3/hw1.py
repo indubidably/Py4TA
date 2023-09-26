@@ -44,7 +44,7 @@ def validate_line(line: str) -> bool:
 
 def validate_date(date: str) -> bool:
     core = date.split(" ")[-1]
-    if re.match(r'\d{4}-\d{2}-\d{2}', core):
+    if re.match(r'\d{4}-\d{2}-\d{2}\n', core):
         return True
     else:
         return False

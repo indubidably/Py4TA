@@ -41,4 +41,4 @@ def test_check_data_real_file():
     with open(result_path) as res:
         for i, _ in enumerate(res, start=1):
             pass
-    assert i == 746
+    assert i == 777
