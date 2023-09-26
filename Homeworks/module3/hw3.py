@@ -27,7 +27,7 @@ assert = custom_range(string.ascii_lowercase, 'p', 'g', -2) == ['p', 'n', 'l', '
 
 import string
 
-
+"""
 def custom_range(*args):
     output = []
     if len(args) == 4:
@@ -51,6 +51,18 @@ def custom_range(*args):
                 output.append(args[0][i])
                 i += step
         return output
+"""
 
 
-
+def custom_range(*args):
+    output = []
+    if len(args) == 2:
+        for i in range(args[0].index(args[1])):
+            output.append(args[0][i])
+    elif len(args) == 3:
+        for i in range(args[0].index(args[1]), args[0].index(args[2])):
+            output.append(args[0][i])
+    elif len(args) == 4:
+        for i in range(args[0].index(args[1]), args[0].index(args[2]), args[3]):
+            output.append(args[0][i])
+    return output
