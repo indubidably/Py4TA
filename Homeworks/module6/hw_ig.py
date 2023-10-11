@@ -8,9 +8,8 @@ def merge_elems(*elems):
         if isinstance(elem, str):
             for char in elem:
                 yield char
-        elif isinstance(elem, (list, tuple)):
-            for item in elem:
-                yield from merge_elems(item)
+        elif hasattr(elem, '__iter__'):
+            yield from merge_elems(*elem)
         else:
             yield elem
         pass
